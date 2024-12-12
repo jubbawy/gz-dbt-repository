@@ -32,7 +32,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 # dbt run or dbt build, all of your models will be built as a view in your data platform. 
 # The configuration below will override this setting for all models inside the mart folder
 # and its sub-folders, so that every model in mart is materialized as a table in BigQuery.
-# You can override this materialisation in a single model with {{ config(materialized="view") }}.
+# You can override this materialisation in a single model with {{ config(materialized="view") }}
+# at the top of a model to materialize as a view.
 
 models:
    my_new_project: # <-- make sure this value matches `project_name` on line 5
