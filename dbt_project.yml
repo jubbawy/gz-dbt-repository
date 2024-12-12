@@ -30,13 +30,14 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 # In dbt, the default materialization for a model is a view. This means, when you run 
 # dbt run or dbt build, all of your models will be built as a view in your data platform. 
-# The configuration below will override this setting for models in the example folder to 
-# instead be materialized as tables. Any models you add to the root of the models folder will 
-# continue to be built as views. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
+# The configuration below will override this setting for all models inside the mart folder
+# and its sub-folders, so that every model in mart is materialized as a table in BigQuery.
+# You can override this materialisation in a single model with {{ config(materialized="view") }}
+# at the top of a model to materialize as a view.
 
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
-      +materialized: table
+   my_new_project: # <-- make sure this value matches `project_name` on line 5
+     mart:
+       +materialized: table
+       finance:
+        +schema: finance
